@@ -1,5 +1,8 @@
 <?php
 define('BASE_PATH', dirname(__FILE__) );
+define('DATABASE_PATH', BASE_PATH . '/database/purchase-log.db');
+
+// Xero Config
 define("XRO_APP_TYPE", "Private");
 define("OAUTH_CALLBACK", "oob");
 define("XERO_CONSUMER_KEY", '');

@@ -11,5 +11,10 @@ switch($_GET['method']) {
         is posted to it. On Failure it wil return a HTTP 500 with an error message
         */
 
-    break;
+        break;
+
+    default:
+        http_response_code(501);
+        echo 'Not Implemented';
+        break;
 }
