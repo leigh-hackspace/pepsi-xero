@@ -3,6 +3,14 @@ Xero Pepsi Machine Hack
 
 # Purpose
 
+# Cloning
+Clone this repo and make sure to also run the following
+
+* `git submodule init`
+* `git submodule update`
+
+This will also clone the required dependancies Including the XeroPHP SDK
+
 # How it/will works
 This project will be split into two parts:
 * RaspberryPi GPIO Listener

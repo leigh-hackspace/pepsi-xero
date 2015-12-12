@@ -1,0 +1,3 @@
+[submodule "API2Xero/libs/XeroOAuth-PHP"]
+	path = API2Xero/libs/XeroOAuth-PHP
+	url = https://github.com/XeroAPI/XeroOAuth-PHP.git
