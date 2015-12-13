@@ -23,7 +23,7 @@ def send_to_xero
 	@invoice.date = Time.now
 	@invoice.due_date = Time.now
 	@invoice.status = 'DRAFT'
-	@invoice.invoice_number = 'INV-1012'
+	@invoice.invoice_number = 'INV-1013'
 	@invoice.line_amount_types = 'Inclusive'
 	@invoice.add_line_item(:item_code => 'beverage_vend')
 	@invoice.save
