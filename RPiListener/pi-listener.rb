@@ -4,7 +4,7 @@ require 'xeroizer'
 include PiPiper
 
 #setup connection
-client = Xeroizer::PrivateApplication.new(ENV['CONSUMER_KEY'], ENV['CONSUMER_SECRET'], ENV['PATH_TO_PRIVATE_KEY'])
+@client = Xeroizer::PrivateApplication.new(ENV['CONSUMER_KEY'], ENV['CONSUMER_SECRET'], ENV['PATH_TO_PRIVATE_KEY'])
 
 def send_to_xero
 	#get info about where to send the transaction
