@@ -9,13 +9,11 @@ def setup
 	send_to_xero
 end
 
-private
-
 def send_to_xero
 	#get info about where to send the transaction
 	@contact = @client.Contact.find('8ba5474b-fd18-4d0d-8a8c-cc5ad23ffeec') #gets the pepsi machine as a contact
 	@item = @client.Item.find('27b832f8-f2db-407c-b654-2ab861052dba') #gets the line item that means one drinks can
-	
+
 	#start composing the invoice
 	@invoice = @client.Invoice.build
 	@invoice.contact = @contact
