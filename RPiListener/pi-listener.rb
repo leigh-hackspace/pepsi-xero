@@ -4,7 +4,12 @@ require 'xeroizer'
 include PiPiper
 
 #setup connection
-@client = Xeroizer::PrivateApplication.new(ENV['CONSUMER_KEY'], ENV['CONSUMER_SECRET'], ENV['PATH_TO_PRIVATE_KEY'])
+def setup
+	@client = Xeroizer::PrivateApplication.new(ENV['CONSUMER_KEY'], ENV['CONSUMER_SECRET'], ENV['PATH_TO_PRIVATE_KEY'])
+	send_to_xero
+end
+
+private
 
 def send_to_xero
 	#get info about where to send the transaction
@@ -25,7 +30,7 @@ def send_to_xero
 end
 
 after :pin => 23, :goes => :high do
-  send_to_xero
+  setup
 end
 
 PiPiper.wait
