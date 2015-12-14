@@ -1,2 +1,5 @@
 API2Xero/config/config.php
 API2Xero/config/certs/xero.*
+
+#ignore ruby environment file
+*_env.sh
