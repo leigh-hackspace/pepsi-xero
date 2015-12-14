@@ -34,13 +34,21 @@ And we add elements to the invoice as necessary.
 `@contact = @client.Contact.find('8ba5474b-fd18-4d0d-8a8c-cc5ad23ffeec')` #gets the pepsi machine as a Contact object using its contact_id, because @invoice.contact requires to be passed a Contact object
 
 `@invoice.contact = @contact` # as mentioned above you need to supply a Contact object here
+
 `@invoice.type = 'ACCREC'` # string input must match either 'ACCREC' (accounts receivable) or 'ACCPAY' (accounts payable)
+
 `@invoice.date = Time.now` # both invoice.date and invoice.due_date expect a UTC DateTime. We weren't terribly bothered about the exact due_date on invoices for our hack so we just made the `due_date` the same as `date`.
+
 `@invoice.due_date = Time.now`
+
 `@invoice.status = 'DRAFT'` # string input, but it must match one of the list 'AUTHORIZED', 'DELETED', 'DRAFT', 'PAID', 'SUBMITTED', 'VOIDED' (see Xeroizer models in source code for details)
+
 `@invoice.invoice_number = 'INV-1014'` # string which must be unique or you will get an API error.
+
 `@invoice.line_amount_types = 'Inclusive'` # string which must match either 'Exclusive' or 'Inclusive'
+
 `@invoice.add_line_item(:item_code => 'beverage_vend')` # this was the parameter that twisted my melon. Based on the behaviour of the #contact method above, I was expecting to have to pass an Item object in here. That doesn't work. Then I thought perhaps the contents of the Item object, expressed as a Hash. Nope. I could see from the Xero documentation that it was expecting LineItems to be an array of LineItem objects, but I could not work out how to create a Line Item object. I knew I wanted to use the sale Item I had already created in Xero via the GUI, and which I could access through the API, but couldn't seem to get Item into LineItem. I even tried directly instantiating a LineItem in Xeroizer, but again it didn't work. Weirdly, all it wants here is the item_code, and it will add the referenced Item as a LineItem. Phew. That bit took about 2 hours, I hope I can save you the trouble.
+
 `@invoice.save` # and you're done.
 
 Further information can be found in the Xeroizer github repo.
