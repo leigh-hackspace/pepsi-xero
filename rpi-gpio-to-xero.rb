@@ -3,7 +3,7 @@ require 'xeroizer'
 
 include PiPiper
 
-if ARGV[0] = "test" then setup
+if ARGV[0] = "test" then setup end
 
 #setup connection
 def setup
