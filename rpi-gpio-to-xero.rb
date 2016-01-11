@@ -36,6 +36,8 @@ setup
 
 after :pin => 23, :goes => :high do
   send_to_xero(client)
+  puts "vend:1can"
+  puts next_invoice_number
 end
 
 PiPiper.wait
