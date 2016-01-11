@@ -6,10 +6,9 @@ include PiPiper
 #setup connection
 def setup
   @client = Xeroizer::PrivateApplication.new(ENV['CONSUMER_KEY'], ENV['CONSUMER_SECRET'], ENV['PATH_TO_PRIVATE_KEY'])
-  send_to_xero
 end
 
-def send_to_xero
+def send_to_xero(@client)
   #get info about where to send the transaction and what to send
   contact = @client.Contact.find('8ba5474b-fd18-4d0d-8a8c-cc5ad23ffeec') #gets the pepsi machine as a contact
   item = @client.Item.find('27b832f8-f2db-407c-b654-2ab861052dba') #gets the line item that means one drinks can
@@ -36,9 +35,7 @@ end
 setup
 
 after :pin => 23, :goes => :high do
-  send_to_xero
+  send_to_xero(@client)
 end
-
-if ARGV[0] = "test" then send_to_xero end
 
 PiPiper.wait
