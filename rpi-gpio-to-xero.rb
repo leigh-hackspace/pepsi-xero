@@ -9,8 +9,6 @@ def setup
   send_to_xero
 end
 
-if ARGV[0] = "test" then setup end
-
 def send_to_xero
   #get info about where to send the transaction and what to send
   contact = client.Contact.find('8ba5474b-fd18-4d0d-8a8c-cc5ad23ffeec') #gets the pepsi machine as a contact
@@ -38,5 +36,7 @@ end
 after :pin => 23, :goes => :high do
   setup
 end
+
+if ARGV[0] = "test" then setup end
 
 PiPiper.wait
