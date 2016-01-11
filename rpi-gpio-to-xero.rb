@@ -1,5 +1,6 @@
 require 'pi_piper'
 require 'xeroizer'
+require 'logger'
 
 include PiPiper
 
