@@ -4,11 +4,11 @@ require 'logger'
 
 include PiPiper
 
-#setup connection
+#setup
 client = Xeroizer::PrivateApplication.new(ENV['CONSUMER_KEY'], ENV['CONSUMER_SECRET'], ENV['PATH_TO_PRIVATE_KEY'])
 logger = Logger.new File.new('pepsixero.log')
 
-def send_to_xero(client)
+def send_to_xero(client, logger)
   #get info about where to send the transaction and what to send
   contact = client.Contact.find('8ba5474b-fd18-4d0d-8a8c-cc5ad23ffeec') #gets the pepsi machine as a contact
   item = client.Item.find('27b832f8-f2db-407c-b654-2ab861052dba') #gets the line item that means one drinks can
@@ -26,12 +26,11 @@ def send_to_xero(client)
   invoice.add_line_item(:item_code => 'beverage_vend')
   invoice.save
 
-  return invoice
+  logger.info "VEND: 1 can TIME: #{Time.now} INVOICE: #{invoice.invoice_number}"
 end
 
 after :pin => 23, :goes => :high do
-  send_to_xero(client)
-  logger.info "VEND: 1 can TIME: #{Time.now} INVOICE: #{invoice.invoice_number}"
+  send_to_xero(client, logger)
 end
 
 PiPiper.wait
