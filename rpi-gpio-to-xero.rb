@@ -16,13 +16,13 @@ def send_to_xero
   @last_invoice_number = @client.Invoice.all(:order => 'Date').last.invoice_number # get the last invoice in the system, we want to increment its invoice number  
 
   #start composing the invoice
-  invoice = client.Invoice.build
+  invoice = @client.Invoice.build
   invoice.contact = contact
   invoice.type = 'ACCREC'
   invoice.date = Time.now
   invoice.due_date = Time.now
   invoice.status = 'AUTHORIZED'
-  invoice.invoice_number = next_invoice_number(last_invoice_number)
+  invoice.invoice_number = @next_invoice_number
   invoice.line_amount_types = 'Inclusive'
   invoice.add_line_item(:item_code => 'beverage_vend')
   invoice.save
