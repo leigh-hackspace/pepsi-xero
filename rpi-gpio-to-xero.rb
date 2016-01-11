@@ -26,11 +26,12 @@ def send_to_xero(client)
   invoice.add_line_item(:item_code => 'beverage_vend')
   invoice.save
 
-  logger.info "vend: 1 can time: #{Time.now} invoice: #{invoice.invoice_number}"
+  return invoice.invoice_number
 end
 
 after :pin => 23, :goes => :high do
   send_to_xero(client)
+  logger.info "vend: 1 can time: #{Time.now} invoice: #{invoice.invoice_number}"
 end
 
 PiPiper.wait
