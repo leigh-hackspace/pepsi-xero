@@ -5,6 +5,7 @@ include PiPiper
 
 #setup connection
 client = Xeroizer::PrivateApplication.new(ENV['CONSUMER_KEY'], ENV['CONSUMER_SECRET'], ENV['PATH_TO_PRIVATE_KEY'])
+logger = Logger.new File.new('pepsixero.log')
 
 def send_to_xero(client)
   #get info about where to send the transaction and what to send
@@ -24,9 +25,7 @@ def send_to_xero(client)
   invoice.add_line_item(:item_code => 'beverage_vend')
   invoice.save
 
-  puts "vend: 1 can"
-  puts Time.now
-  puts invoice.invoice_number
+  logger.info "vend: 1 can time: #{Time.now} invoice: #{invoice.invoice_number}"
 end
 
 after :pin => 23, :goes => :high do
