@@ -26,7 +26,7 @@ def send_to_xero(client)
 
   puts "vend: 1 can"
   puts Time.now
-  puts next_invoice_number
+  puts invoice.invoice_number
 end
 
 after :pin => 23, :goes => :high do
