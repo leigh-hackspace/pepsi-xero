@@ -5,7 +5,7 @@ include PiPiper
 
 #setup connection
 def setup
-  client = Xeroizer::PrivateApplication.new(ENV['CONSUMER_KEY'], ENV['CONSUMER_SECRET'], ENV['PATH_TO_PRIVATE_KEY'])
+  @client = Xeroizer::PrivateApplication.new(ENV['CONSUMER_KEY'], ENV['CONSUMER_SECRET'], ENV['PATH_TO_PRIVATE_KEY'])
 end
 
 def send_to_xero(client)
@@ -35,7 +35,7 @@ end
 setup
 
 after :pin => 23, :goes => :high do
-  send_to_xero(client)
+  send_to_xero(@client)
   puts "vend:1can"
   puts next_invoice_number
 end
