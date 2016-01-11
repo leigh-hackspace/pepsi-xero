@@ -4,9 +4,7 @@ require 'xeroizer'
 include PiPiper
 
 #setup connection
-def setup
-  @client = Xeroizer::PrivateApplication.new(ENV['CONSUMER_KEY'], ENV['CONSUMER_SECRET'], ENV['PATH_TO_PRIVATE_KEY'])
-end
+client = Xeroizer::PrivateApplication.new(ENV['CONSUMER_KEY'], ENV['CONSUMER_SECRET'], ENV['PATH_TO_PRIVATE_KEY'])
 
 def send_to_xero(client)
   #get info about where to send the transaction and what to send
@@ -21,23 +19,18 @@ def send_to_xero(client)
   invoice.date = Time.now
   invoice.due_date = Time.now
   invoice.status = 'AUTHORISED'
-  invoice.invoice_number = next_invoice_number(last_invoice_number)
+  invoice.invoice_number = "INV-"+(last_invoice_number.match(/\d+$/).to_s.to_i+1).to_s
   invoice.line_amount_types = 'Inclusive'
   invoice.add_line_item(:item_code => 'beverage_vend')
   invoice.save
-end
 
-def next_invoice_number(last_invoice_number)
-  #matches the numeric part of the invoice number, increments it, and makes it back into the right format for Xero.
-  next_invoice_number = "INV-"+(last_invoice_number.match(/\d+$/).to_s.to_i+1).to_s
+  puts "vend: 1 can"
+  puts Time.now
+  puts next_invoice_number
 end
-
-setup
 
 after :pin => 23, :goes => :high do
-  send_to_xero(@client)
-  puts "vend:1can"
-  puts next_invoice_number
+  send_to_xero(client)
 end
 
 PiPiper.wait
