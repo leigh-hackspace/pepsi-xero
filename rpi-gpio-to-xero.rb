@@ -33,10 +33,12 @@ def next_invoice_number(last_invoice_number)
   next_invoice_number = "INV-"+(last_invoice_number.match(/\d+$/).to_s.to_i+1).to_s
 end
 
+setup
+
 after :pin => 23, :goes => :high do
-  setup
+  send_to_xero
 end
 
-if ARGV[0] = "test" then setup end
+if ARGV[0] = "test" then send_to_xero end
 
 PiPiper.wait
