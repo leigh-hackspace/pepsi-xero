@@ -21,7 +21,7 @@ def send_to_xero
   invoice.type = 'ACCREC'
   invoice.date = Time.now
   invoice.due_date = Time.now
-  invoice.status = 'AUTHORIZED'
+  invoice.status = 'AUTHORISED'
   invoice.invoice_number = @next_invoice_number
   invoice.line_amount_types = 'Inclusive'
   invoice.add_line_item(:item_code => 'beverage_vend')
