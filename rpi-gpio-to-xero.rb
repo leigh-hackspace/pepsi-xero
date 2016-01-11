@@ -3,13 +3,13 @@ require 'xeroizer'
 
 include PiPiper
 
-if ARGV[0] = "test" then setup end
-
 #setup connection
 def setup
   client = Xeroizer::PrivateApplication.new(ENV['CONSUMER_KEY'], ENV['CONSUMER_SECRET'], ENV['PATH_TO_PRIVATE_KEY'])
   send_to_xero
 end
+
+if ARGV[0] = "test" then setup end
 
 def send_to_xero
   #get info about where to send the transaction and what to send
