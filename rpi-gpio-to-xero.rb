@@ -6,7 +6,7 @@ include PiPiper
 
 #setup
 client = Xeroizer::PrivateApplication.new(ENV['CONSUMER_KEY'], ENV['CONSUMER_SECRET'], ENV['PATH_TO_PRIVATE_KEY'])
-logger = Logger.new File.new('pepsixero.log')
+logger = Logger.new('pepsixero.log')
 
 def send_to_xero(client, logger)
   #get info about where to send the transaction and what to send
